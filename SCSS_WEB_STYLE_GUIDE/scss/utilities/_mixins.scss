@@ -1,0 +1,32 @@
+
+//repeated img positioning
+
+@mixin img-position {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//repeated flex
+
+@mixin flex-disp-dir {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+//buttons hover color
+
+@mixin light-color($start-color){
+    background-color: lighten($start-color, 15%);
+    transition: background-color 1s ease-out;
+}
+
+//media query
+
+@mixin mq($size) {
+    @media (min-width: $size) {
+      @content;
+    }
+  }

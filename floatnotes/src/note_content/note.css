@@ -1,0 +1,141 @@
+html, body {
+  font-family: Arial, sans-serif !important;
+  text-align:left !important;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  -moz-box-sizing: border-box !important;
+}
+
+
+
+.content {
+  -moz-box-sizing: border-box;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  bottom: 5px;
+  right: 5px;
+  font-size: inherit;
+  color: inherit;
+  overflow: auto;
+}
+
+textarea {
+  font-family: Arial, sans-serif !important;
+  font-size: inherit;
+  width: 100% !important;
+  height: 100% !important;
+  -moz-box-sizing: border-box !important;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index:1;
+  padding: 5px 0px 0px 5px;
+  margin: 0;
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+  background-color: inherit !important;
+  display: none;
+  color: inherit;
+  border-radius: 5px;
+  -moz-border-radius: 5px !important;
+}
+
+.note {
+  color: black;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid #555 !important;
+  -moz-box-shadow: 0px 0px 5px #888 !important;
+  box-shadow: 0px 0px 5px #888 !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+}
+.note.edit {
+  border-color: red !important;
+  border-width: 2px !important;
+}
+
+.note.fixed {
+  border-width: 2px !important;
+}
+
+.note.dark {
+  color: white !important;
+}
+
+.note.over:not(.edit) {
+  left: 27px;
+}
+
+.note.over:not(.edit) .menu {
+  display: block;
+}
+
+.note .floatnotes-menuspacer {
+    position: absolute !important;
+    top:-10px !important;
+    left:-40px !important;
+    height: 100px !important;
+    display: none;
+    width:40px !important;
+    margin-right: -1px !important;
+}
+
+.note .menu {
+  width: 20px;
+  padding: 3px;
+  position: absolute;
+  top: 3px;
+  display: none;
+  left: -27px;
+  border: 1px solid #555;
+  border-right: none;
+  -moz-border-radius: 5px 0px 0px 5px !important;
+  border-radius: 5px 0px 0px 5px !important;
+}
+
+.note.fixed .menu {
+  margin-left: -1px;
+  border-width: 2px;
+}
+
+.menu-item {
+    color: #555;
+    display: block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.menu-item i:before {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.note.dark i:before {
+  color: white;
+}
+
+.menu-item:hover {
+    opacity: 1;
+}
+
+.note.dark .menu-item {
+    color: white;
+}
+
+.note.edit textarea {
+  display: block;
+}
+
+.note.edit .content {
+  display: none;
+}

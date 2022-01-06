@@ -1,0 +1,15 @@
+#floatnotes-toolbar-button {
+    list-style-image: url("chrome://floatnotes/skin/note_24.png");
+}
+
+#floatnotes-toolbar-button.hidden, #floatnotes-toolbar-button[disabled="true"]  {
+    list-style-image: url("chrome://floatnotes/skin/note_dis_24.png");
+}
+
+toolbar[iconsize="small"] #floatnotes-toolbar-button {
+    list-style-image: url("chrome://floatnotes/skin/note_16.png");
+}
+
+toolbar[iconsize="small"] #floatnotes-toolbar-button.hidden, toolbar[iconsize="small"] #floatnotes-toolbar-button[disabled="true"]  {
+    list-style-image: url("chrome://floatnotes/skin/note_dis_16.png");
+}

@@ -1,0 +1,9 @@
+# Vendors
+node_modules
+
+# Artifacts
+dist
+build
+.expo
+.next
+coverage

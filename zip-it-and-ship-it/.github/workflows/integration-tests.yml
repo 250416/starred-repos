@@ -1,0 +1,79 @@
+name: Integration test
+
+on:
+  pull_request:
+    branches: [main, 'chore/ci-integration-tests']
+    # Run on release PRs only, or changes to this same file
+    paths: ['CHANGELOG.md', '.github/workflows/integration-tests.yml']
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        site: ['netlify/netlify-plugin-nextjs']
+    steps:
+      - name: Checking out zip-it-and-ship-it
+        uses: actions/checkout@v2
+        with:
+          path: zip-it-and-ship-it
+      - name: Checking out test site
+        uses: actions/checkout@v2
+        with:
+          repository: '${{ matrix.site }}'
+          path: test-site
+      - name: Checking out netlify-cli
+        uses: actions/checkout@v2
+        with:
+          repository: netlify/cli
+          path: netlify-cli
+      - name: Installing Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '*'
+          cache: 'npm'
+          # We need to add each of the lockfile paths so that the global npm cache is populated accordingly
+          cache-dependency-path: |
+            zip-it-and-ship-it/package-lock.json
+            test-site/package-lock.json
+            netlify-cli/npm-shrinkwrap.json
+      - name: Installing netlify-cli
+        run: npm ci
+        working-directory: netlify-cli
+      - name: Installing test site
+        run: npm install
+        working-directory: test-site
+      - name: Symlinking zip-it-and-ship-it (1/2)
+        run:
+          rm -rf $GITHUB_WORKSPACE/netlify-cli/node_modules/@netlify/zip-it-and-ship-it && mkdir -p
+          $GITHUB_WORKSPACE/netlify-cli/node_modules/@netlify && ln -s $GITHUB_WORKSPACE/zip-it-and-ship-it
+          $GITHUB_WORKSPACE/netlify-cli/node_modules/@netlify/zip-it-and-ship-it
+      - name: Symlinking zip-it-and-ship-it (2/2)
+        run:
+          rm -rf $GITHUB_WORKSPACE/netlify-cli/node_modules/@netlify/build/node_modules/@netlify/zip-it-and-ship-it &&
+          mkdir -p $GITHUB_WORKSPACE/netlify-cli/node_modules/@netlify/build/node_modules/@netlify && ln -s
+          $GITHUB_WORKSPACE/zip-it-and-ship-it
+          $GITHUB_WORKSPACE/netlify-cli/node_modules/@netlify/build/node_modules/@netlify/zip-it-and-ship-it
+      - name: Installing zip-it-and-ship-it
+        run: npm install && npm run build
+        working-directory: zip-it-and-ship-it
+      - name: Building and deploying site
+        run:
+          $GITHUB_WORKSPACE/netlify-cli/bin/run deploy --build --json --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{
+          secrets.NETLIFY_TOKEN }} --functions .netlify/functions > .netlify-deploy-log.json
+        working-directory: test-site
+      - name: Parsing deploy result
+        run: |
+          node -e "console.log('deploy_log_url=' + require('./.netlify-deploy-log.json').logs)" >> $GITHUB_ENV
+          node -e "console.log('deploy_url=' + require('./.netlify-deploy-log.json').deploy_url)" >> $GITHUB_ENV
+        working-directory: test-site
+      - name: Posting comment
+        uses: KeisukeYamashita/create-comment@v1
+        with:
+          check-only-first-line: true
+          unique: true
+          comment: |
+            ## Integration Test: ${{ matrix.site }}
+
+            - **Deploy URL**: ${{ env.deploy_url }}
+            - **Deploy logs**: ${{ env.deploy_log_url }}

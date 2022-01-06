@@ -1,0 +1,47 @@
+<!ENTITY preferences.title "Floatnotes Preferences" >
+
+<!ENTITY preferences.note.title "Notes" >
+<!ENTITY preferences.note.default_val "Default values" >
+<!ENTITY preferences.note.width "Width:" >
+<!ENTITY preferences.note.height "Height:" >
+<!ENTITY preferences.note.color "Color:" >
+<!ENTITY preferences.note.font-size.text "Font size:" >
+<!ENTITY preferences.note.font-size.unit "px" >
+
+<!ENTITY preferences.location.title "Location" >
+<!ENTITY preferences.location.default_loc "Default location" >
+<!ENTITY preferences.location.query "... with query, e.g.: www.example.com/page?s=query" >
+<!ENTITY preferences.location.hash "... with anchor, e.g.: www.example.com/page#anchor" >
+<!ENTITY preferences.location.query_hash "... with query and anchor, e.g.: www.example.com/page?s=query#anchor" >
+<!ENTITY preferences.location.page "Current page, e.g.: www.example.com/page" >
+<!ENTITY preferences.location.wild_page "Current page and subpages, e.g.: Pages starting with www.example.com/page" >
+<!ENTITY preferences.location.website "Whole website, e.g.: Pages starting with www.example.com" >
+<!ENTITY preferences.location.updateHash "Update notes when anchor changes" >
+<!ENTITY preferences.location.includePageHash "Show notes from page (including query string)" >
+
+<!ENTITY preferences.view.title "View" >
+<!ENTITY preferences.view.show_indicator "Show indicators for notes that are outside the current view" >
+<!ENTITY preferences.view.indicator_timeout "Fade out after:" >
+<!ENTITY preferences.view.indicator_timeout_0 "(0 = don't fade out)" >
+<!ENTITY preferences.view.indicator_timeout_unit "seconds" >
+<!ENTITY preferences.view.show_toolbar_button "Show button in toolbar" >
+<!ENTITY preferences.view.show_menu "Show entry in 'Tools' menu" >
+<!ENTITY preferences.view.show_context_delete "Show 'Delete note' in context menu" >
+<!ENTITY preferences.view.show_context_locations "Show 'Edit location' in context menu" >
+<!ENTITY preferences.view.show_context_hide "Show 'Hide notes' in context menu" >
+
+<!ENTITY preferences.notifications.title "Notifications" >
+<!ENTITY preferences.notifications.note_deletion "Confirm deletion of notes" >
+<!ENTITY preferences.notifications.site_not_supported "Show warning if website is not supported" >
+
+<!ENTITY preferences.storage.title "Storage" >
+<!ENTITY preferences.storage.default_location "Default location (profile folder)" >
+<!ENTITY preferences.storage.custom_location "Custom location" >
+<!ENTITY preferences.storage.choose "Choose..." >
+<!ENTITY preferences.storage.file_exists_message "The new target location does already exist. What do you want to do?" >
+<!ENTITY preferences.storage.overwrite "Overwrite existing file" >
+<!ENTITY preferences.storage.merge "Merge notes" >
+<!ENTITY preferences.storage.abort "Abort (keep current location)" >
+
+<!ENTITY preferences.sync.title "Sync" >
+<!ENTITY preferences.sync.enable "Enable synchronisation (requires Firefox Sync)" >

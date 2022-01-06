@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+
+*, h1, h2, h3, h4, h5, h6, a, p {
+    font-family: 'Merriweather', serif;
+}
+
+.about-subtitle {
+    margin-bottom: 0;
+}
+
+#my-info {
+    background-color: #09334e;
+}
+
+#short-description {
+    color: whitesmoke;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+#info-name {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: whitesmoke;
+}
+
+#my-info .grid-y .cell a {
+    color: whitesmoke;
+}
+
+.thumbnail {
+    border-radius: 3px;
+}
+
+#project-thumbnail {
+    transition: 300ms ease-in-out;
+}
+
+#project-thumbnail:hover {
+    border: solid 0.5px lightgray;
+}

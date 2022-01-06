@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!DOCTYPE window SYSTEM "chrome://floatnotes/locale/notelist.dtd">
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/places/organizer.css" type="text/css"?>
+<window id="floatnotes-notelist" 
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml" 
+        xmlns:h="http://www.w3.org/1999/xhtml" 
+        style="width:600px;height:400px;"  
+        orient="horizontal"
+        persist="screenX screenY width height"
+        title="&manager.title;">
+
+
+    <commandset>
+        <command id="cmd_closeWindow" oncommand="window.close()" />
+    </commandset>
+
+    <keyset>
+        <key id="key_closeWindow" key="w" command="cmd_closeWindow" 
+              modifiers="accel" />
+    </keyset>
+
+    <broadcasterset>
+        <broadcaster id="isEnabled" disabled="true" />
+        <broadcaster id="searchListButtons" disabled="true" />
+    </broadcasterset>
+
+    <vbox>
+        <listbox id="searches" flex="1" 
+          onselect="SearchManager.updateButtons(); NoteManager.search();"
+          ondragstart="dragHandler.dragStart(event)"
+          ondragover="dragHandler.dragOver(event)"
+          ondragleave="dragHandler.dragLeave(event)"
+          ondrop="dragHandler.onDrop(event);"
+        />
+        <hbox>
+            <button 
+              observes="searchListButtons" 
+              label="&button.edit;" 
+              oncommand="SearchManager.openEditDialog()"
+            />
+            <button 
+              observes="searchListButtons" 
+              label="&button.remove;" 
+              oncommand="SearchManager.deleteSelectedSearch()"
+            />
+        </hbox>
+    </vbox>
+    <splitter collapse="before">
+        <grippy />
+    </splitter>
+    <vbox flex="3">
+        <hbox pack="end" align="center">
+            <textbox 
+              flex="1" 
+              type="search" 
+              id="search" 
+              oncommand="NoteManager.search()" 
+              emptytext="&searchtext;"
+            />
+            <button 
+              style="display:none;" 
+              class="small" 
+              id='saveSearch'
+              label="&button.save;" 
+              oncommand="SearchManager.saveSearch();"
+            />
+        </hbox>
+        <hbox pack="end">
+            <description 
+              flex="1"
+              id="searchMsg" 
+              style="font-size:0.9em;color:gray;font-style:italic;display:none;"
+            />
+              <description 
+                id="counter" 
+                value="" 
+                pack="right" 
+                style="font-size:0.9em;color:gray;font-style:italic;margin-right:5px;"
+              />
+            </hbox>
+        <vbox flex="1">
+            <tree 
+              id="notes" 
+              flex="2" 
+              onselect="TreeView.selectionChanged()" 
+              hidecolumnpicker="false" 
+              persist="sortDirection sortResource" 
+              sortDirection="ascending" 
+              sortResource="content"
+            >
+              <treecols>  
+                <treecol 
+                  id="content" 
+                  label="&list.title;" 
+                  flex="1" 
+                  onclick="NoteManager.sortNotesBy(this)" 
+                  persist="width hidden"
+                />
+                <splitter class="tree-splitter" />
+                <treecol 
+                  id="url" 
+                  label="&list.url;" 
+                  flex="1" 
+                  onclick="NoteManager.sortNotesBy(this)" 
+                  persist="width hidden"
+                />
+                <splitter class="tree-splitter" />
+                <treecol 
+                  id="creation_date" 
+                  label="&list.created;" 
+                  flex="1" 
+                  onclick="NoteManager.sortNotesBy(this)" 
+                  persist="width hidden"
+                />
+                <splitter class="tree-splitter" />
+                <treecol 
+                  id="modification_date" 
+                  label="&list.modified;" 
+                  flex="1" 
+                  onclick="NoteManager.sortNotesBy(this)" 
+                  persist="width hidden"
+                />
+              </treecols>  
+              <treechildren ondblclick="NoteManager.loadPageForSelectedNote()"/>
+            </tree>
+        </vbox>
+        <splitter />
+        <grid>
+            <columns>
+                <column/>
+                <column flex="1"/>
+            </columns>
+            <rows>
+                <textbox 
+                  flex="1" 
+                  id="text" 
+                  multiline="true"
+                  style="height:100px"
+                  onchange="NoteManager.saveSelectedNote()"
+                />
+                <row align="center">
+                    <label control="color" value="&color;"/>
+                    <hbox flex="1">
+                        <colorpicker id="color" 
+                            type="button" 
+                            observes="isEnabled"
+                            onchange="NoteManager.saveSelectedNote()" />
+                        <spacer flex="1" />
+                        <button 
+                          id="delete" 
+                          label="&button.remove;" 
+                          observes="isEnabled" 
+                          oncommand="NoteManager.deleteSelectedNotes()"
+                        />
+                    </hbox>   
+                </row>
+            </rows>
+        </grid>
+        <spacer style="height:5px"/>
+    </vbox>
+    <script type="text/javascript" src="chrome://floatnotes/content/notelist.js"> </script>
+</window>
